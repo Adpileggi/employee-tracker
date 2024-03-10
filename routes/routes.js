@@ -34,8 +34,10 @@ db.query(`INSERT INTO department (name) VALUES (${data.add-dept})`, function (er
     console.log(results);
 })
 
-// request to add role 
-db.query(`INSERT INTO role (title, salary, department_id) VALUES (${data.role.name}, ${data.role-salary}, ${data.role-dept[0]})`, function (err, results) {
+// request to add role
+    // to find dept id do arry.find(el = el.deptid === id)
+    // deptarray.indexof(dept id) + 1
+db.query(`INSERT INTO role (title, salary, department_id) VALUES (${data.role.name}, ${data.role-salary}, ${data.role-dept[i]})`, function (err, results) {
     if (err) {
         console.log(err);
     }
@@ -43,7 +45,7 @@ db.query(`INSERT INTO role (title, salary, department_id) VALUES (${data.role.na
 })
 
 // request to add employee
-db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (${data.employee-first}, ${data.employee-last}, ${data.employee-role[0]}, ${data.employee-mgr})`, function (err, results) {
+db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (${data.employee-first}, ${data.employee-last}, ${data.employee-role[i]}, ${data.employee-mgr})`, function (err, results) {
     if (err) {
         console.log(err);
     }
