@@ -17,6 +17,7 @@ inquirer
             console.log(data.options)
             if (data.options === 'View all departments') {
                 // make get route here
+                
             } else if (data.options === 'View all roles') {
                 // make get route here
             } else if (data.options === 'View all employees') {
