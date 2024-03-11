@@ -67,9 +67,9 @@ function addRole(db, startMenu) {
 
 function addEmployee(db, startMenu) {
 
-    let roleTitleArray =[];
+    let roleTitleArray = [];
 
-    let employeeLastNameArray =[];
+    let employeeLastNameArray = [];
 
     db.query(`SELECT * FROM role`, function (err, results) {
 
@@ -81,6 +81,7 @@ function addEmployee(db, startMenu) {
         }
 
 
+        // only display manager's id's (NULL)
         db.query(`SELECT * FROM employee where manager_id  IS NULL;`, function (err, results) {
             for (let i = 0; i < results.length; i++) {
                 employeeLastNameArray.push({
@@ -128,18 +129,58 @@ function addEmployee(db, startMenu) {
     })
 }
 
-function updateEmployee() {
-    inquirer
-        .prompt([
-            {
-                type: 'list',
-                name: 'update_role',
-                message: `Please provide the employee's new role`
-                // choices: an array of all the roles
-            },
-        ]).then((data) => {
-            console.log(data)
+function updateEmployee(db, startMenu) {
+
+    let roleTitleArray = [];
+
+    let employeeLastNameArray = [];
+
+    db.query(`SELECT * FROM role`, function (err, results) {
+
+        for (let i = 0; i < results.length; i++) {
+            roleTitleArray.push({
+                name: results[i].title,
+                value: results[i].id
+            })
+        }
+
+        // only display manager's id's (NULL)
+        db.query(`SELECT * FROM employee;`, function (err, results) {
+            for (let i = 0; i < results.length; i++) {
+                employeeLastNameArray.push({
+                    name: results[i].last_name,
+                    value: results[i].id
+                })
+            }
+
+            inquirer
+                .prompt([
+                    {
+                        type: 'list',
+                        name: 'emplName',
+                        Message: `please select which employee's role to update`,
+                        choices: employeeLastNameArray
+                    },
+                    {
+                        type: 'list',
+                        name: 'updateRole',
+                        message: `Please provide the employee's new role`,
+                        choices: roleTitleArray
+                    },
+
+                ]).then((data) => {
+                    console.log(data)
+                    db.query(`UPDATE employee SET role_id = ${data.updateRole} WHERE id = ${data.emplName};`, function (err, results) {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log(results);
+                        startMenu();
+                    })
+                })
+
         })
+    })
 }
 
 module.exports = {
