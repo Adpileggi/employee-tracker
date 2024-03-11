@@ -14,8 +14,8 @@ const db = mysql.createConnection(
     console.log(`Connected to the employee_db database`)
 );
 
-const prompt = require('../prompts/prompts')
-const { displayDept, displayRole, displayEmployee } = require('../prompts/query')
+const prompt = require('./prompts/prompts')
+const { displayDept, displayRole, displayEmployee } = require('./prompts/query')
 
 function startMenu() {
     inquirer
