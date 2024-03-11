@@ -20,6 +20,8 @@
 
   To use the applicaion, the user must invoke "node index.js" in the command line. Then the user will see a series of prompts. The prompts will allow the user to view or alter information within the database. 
 
+  [Walkthrough Video](https://drive.google.com/file/d/14azw4CETV-qfsVxhevBecKE3UrTbTrlv/view)
+
   ## Testing
 
   N/A
