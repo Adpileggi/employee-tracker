@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+require('dotenv').config();
 const fs = require('fs')
 require('console.table')
 const mysql = require('mysql2');
@@ -11,7 +12,9 @@ const db = mysql.createConnection(
         // make database
         database: process.env.DB_name
     },
+
     console.log(`Connected to the employee_db database`)
+    
 );
 
 const prompt = require('./prompts/prompts')
